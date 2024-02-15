@@ -5,7 +5,11 @@ const Spinner = () => {
     <img
       src={Gif}
       alt="Loading"
-      style={{ margin: "0 auto", alignSelf: "center" }}
+      style={{
+        margin: "0 auto",
+        alignSelf: "center",
+        justifyContent: "center",
+      }}
     />
   );
 };

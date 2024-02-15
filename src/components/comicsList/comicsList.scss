@@ -1,6 +1,9 @@
 .comics {
     &__list {
+        display:flex;
+        flex-direction: column;
         margin-top: 45px;
+        min-height: 100vh;
     }
     &__grid {
         display: grid;

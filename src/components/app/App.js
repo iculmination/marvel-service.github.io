@@ -1,41 +1,35 @@
-import { Component } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
 import AppHeader from "../appHeader/AppHeader";
-import RandomChar from "../randomChar/RandomChar";
-import CharList from "../charList/CharList";
-import CharInfo from "../charInfo/CharInfo";
-import ErrorBoundary from "../errorBoundary/ErrorBoundary";
-import decoration from "../../resources/img/vision.png";
+import Spinner from "../spinner/Spinner";
 
-class App extends Component {
-  state = {
-    selectedChar: null,
-  };
+const Page404 = lazy(() => import("../pages/404"));
+const MainPage = lazy(() => import("../pages/MainPage"));
+const ComicsPage = lazy(() => import("../pages/ComicsPage"));
+const SingleComicsPage = lazy(() => import("../pages/SingleComicsPage"));
 
-  onCharSelected = (id) => {
-    this.setState({ selectedChar: id });
-  };
-
-  render() {
-    return (
+const App = () => {
+  return (
+    <Router>
       <div className="app">
         <AppHeader />
         <main>
-          <ErrorBoundary>
-            <RandomChar />
-          </ErrorBoundary>
-          <div className="char__content">
-            <ErrorBoundary>
-              <CharList onCharSelected={this.onCharSelected} selectedChar={this.state.selectedChar} />
-            </ErrorBoundary>
-            <ErrorBoundary>
-              <CharInfo selectedChar={this.state.selectedChar} />
-            </ErrorBoundary>
-          </div>
-          <img className="bg-decoration" src={decoration} alt="vision" />
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+
+              <Route path="/comics" element={<ComicsPage />} />
+
+              <Route path="/comics/:comicId" element={<SingleComicsPage />} />
+
+              <Route path="*" element={<Page404 />} />
+            </Routes>
+          </Suspense>
         </main>
       </div>
-    );
-  }
-}
+    </Router>
+  );
+};
 
 export default App;
