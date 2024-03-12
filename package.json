@@ -1,5 +1,4 @@
 {
-  "homepage": "https://iculmination.github.io/marvel-service",
   "name": "marvel",
   "version": "0.1.0",
   "private": true,
@@ -41,7 +40,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
     "netlify-cli": "^17.15.7",
     "sass": "^1.38.0"
   }
